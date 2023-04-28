@@ -1,0 +1,230 @@
+{
+    "metadata": {
+        "transaction_key": "deprecated",
+        "request_id": "343ee62d-3428-4326-aec2-6786cd21b244",
+        "sha256": "2d5b81411de4b5a28b908639f293a56355995dc3bbc1eab2e42d542ca8b0173a",
+        "created": "2023-04-28T01:42:37.940Z",
+        "duration": 19.0,
+        "channels": 1,
+        "models": [
+            "3312b52b-d08e-4072-bfff-124c410b770d"
+        ],
+        "model_info": {
+            "3312b52b-d08e-4072-bfff-124c410b770d": {
+                "name": "general-nova",
+                "version": "2023-03-13.31000",
+                "arch": "nova"
+            }
+        }
+    },
+    "results": {
+        "channels": [
+            {
+                "alternatives": [
+                    {
+                        "transcript": "Yep. I said it before and I'll say it again. Life moves pretty fast. You don't stop and look around once in a while. You could miss it.",
+                        "confidence": 0.99658203,
+                        "words": [
+                            {
+                                "word": "yep",
+                                "start": 5.44,
+                                "end": 5.94,
+                                "confidence": 0.87646484,
+                                "punctuated_word": "Yep."
+                            },
+                            {
+                                "word": "i",
+                                "start": 7.095,
+                                "end": 7.2549996,
+                                "confidence": 0.87060547,
+                                "punctuated_word": "I"
+                            },
+                            {
+                                "word": "said",
+                                "start": 7.2549996,
+                                "end": 7.415,
+                                "confidence": 0.98779297,
+                                "punctuated_word": "said"
+                            },
+                            {
+                                "word": "it",
+                                "start": 7.415,
+                                "end": 7.575,
+                                "confidence": 0.9970703,
+                                "punctuated_word": "it"
+                            },
+                            {
+                                "word": "before",
+                                "start": 7.575,
+                                "end": 7.895,
+                                "confidence": 0.9995117,
+                                "punctuated_word": "before"
+                            },
+                            {
+                                "word": "and",
+                                "start": 7.895,
+                                "end": 8.055,
+                                "confidence": 0.50878906,
+                                "punctuated_word": "and"
+                            },
+                            {
+                                "word": "i'll",
+                                "start": 8.055,
+                                "end": 8.295,
+                                "confidence": 0.9970703,
+                                "punctuated_word": "I'll"
+                            },
+                            {
+                                "word": "say",
+                                "start": 8.295,
+                                "end": 8.455,
+                                "confidence": 0.9980469,
+                                "punctuated_word": "say"
+                            },
+                            {
+                                "word": "it",
+                                "start": 8.455,
+                                "end": 8.615,
+                                "confidence": 0.9980469,
+                                "punctuated_word": "it"
+                            },
+                            {
+                                "word": "again",
+                                "start": 8.615,
+                                "end": 9.115,
+                                "confidence": 0.9025879,
+                                "punctuated_word": "again."
+                            },
+                            {
+                                "word": "life",
+                                "start": 9.975,
+                                "end": 10.295,
+                                "confidence": 0.9946289,
+                                "punctuated_word": "Life"
+                            },
+                            {
+                                "word": "moves",
+                                "start": 10.295,
+                                "end": 10.615,
+                                "confidence": 0.9995117,
+                                "punctuated_word": "moves"
+                            },
+                            {
+                                "word": "pretty",
+                                "start": 10.615,
+                                "end": 11.014999,
+                                "confidence": 1.0,
+                                "punctuated_word": "pretty"
+                            },
+                            {
+                                "word": "fast",
+                                "start": 11.014999,
+                                "end": 11.514999,
+                                "confidence": 0.99194336,
+                                "punctuated_word": "fast."
+                            },
+                            {
+                                "word": "you",
+                                "start": 11.975,
+                                "end": 12.135,
+                                "confidence": 0.99902344,
+                                "punctuated_word": "You"
+                            },
+                            {
+                                "word": "don't",
+                                "start": 12.135,
+                                "end": 12.375,
+                                "confidence": 0.9992676,
+                                "punctuated_word": "don't"
+                            },
+                            {
+                                "word": "stop",
+                                "start": 12.375,
+                                "end": 12.695,
+                                "confidence": 1.0,
+                                "punctuated_word": "stop"
+                            },
+                            {
+                                "word": "and",
+                                "start": 12.695,
+                                "end": 12.855,
+                                "confidence": 0.9902344,
+                                "punctuated_word": "and"
+                            },
+                            {
+                                "word": "look",
+                                "start": 12.855,
+                                "end": 13.014999,
+                                "confidence": 1.0,
+                                "punctuated_word": "look"
+                            },
+                            {
+                                "word": "around",
+                                "start": 13.014999,
+                                "end": 13.334999,
+                                "confidence": 1.0,
+                                "punctuated_word": "around"
+                            },
+                            {
+                                "word": "once",
+                                "start": 13.334999,
+                                "end": 13.575,
+                                "confidence": 0.99365234,
+                                "punctuated_word": "once"
+                            },
+                            {
+                                "word": "in",
+                                "start": 13.575,
+                                "end": 13.735,
+                                "confidence": 0.99658203,
+                                "punctuated_word": "in"
+                            },
+                            {
+                                "word": "a",
+                                "start": 13.735,
+                                "end": 13.815,
+                                "confidence": 0.9428711,
+                                "punctuated_word": "a"
+                            },
+                            {
+                                "word": "while",
+                                "start": 13.815,
+                                "end": 14.315,
+                                "confidence": 0.8984375,
+                                "punctuated_word": "while."
+                            },
+                            {
+                                "word": "you",
+                                "start": 14.614937,
+                                "end": 14.774937,
+                                "confidence": 0.6347656,
+                                "punctuated_word": "You"
+                            },
+                            {
+                                "word": "could",
+                                "start": 14.774937,
+                                "end": 15.014936,
+                                "confidence": 0.9926758,
+                                "punctuated_word": "could"
+                            },
+                            {
+                                "word": "miss",
+                                "start": 15.014936,
+                                "end": 15.254937,
+                                "confidence": 0.9995117,
+                                "punctuated_word": "miss"
+                            },
+                            {
+                                "word": "it",
+                                "start": 15.254937,
+                                "end": 15.754937,
+                                "confidence": 0.98657227,
+                                "punctuated_word": "it."
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
