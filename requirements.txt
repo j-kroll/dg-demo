@@ -1,1 +1,4 @@
 deepgram-sdk
+ffmpeg
+pydub
+requests
