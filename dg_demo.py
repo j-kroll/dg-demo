@@ -8,31 +8,33 @@ from pydub import AudioSegment
 from pydub.playback import play
 
 from secrets import DEEPGRAM_API_KEY
+from keywords import KEYWORDS
+from sources import SOURCES
 
 
-file_path = "https://play.podtrac.com/npr-510289/edge1.pod.npr.org/anon.npr-mp3/npr/pmoney/2023/04/20230426_pmoney_e58d4524-d165-42f8-9fbd-10472ce664a0.mp3"
-file_type = file_path.split(".")[-1]
-mimetype = f"audio/{file_type}"
-audio_segment = AudioSegment.from_file(BytesIO(requests.get(file_path).content), format=file_type)
+deepgram = Deepgram(DEEPGRAM_API_KEY)
 
-async def main():
-
-  deepgram = Deepgram(DEEPGRAM_API_KEY)
-
-  if file_path.startswith("http"):
+def get_source(url, file_type):
+  mimetype = f"audio/{file_type}"
+  if url.startswith("http"):
     source = {
-      "url": file_path
+      "url": url
     }
   else:
-    audio = open(file_path, "rb")
+    audio = open(url, "rb")
     source = {
       "buffer": audio,
       "mimetype": mimetype
     }
+  return source
 
+async def transcribe(audio):
+  # TODO cache transcript per url to avoid re-transcribing
+  # f = open("zoo_transcript.json")
+  # response = json.loads(f.read())
   response = await asyncio.create_task(
     deepgram.transcription.prerecorded(
-      source,
+      audio,
       {
         "smart_format": True,
         "utterances": True,
@@ -40,25 +42,27 @@ async def main():
       }
     )
   )
+  return response
 
-  # f = open("zoo_transcript.json")
-  # response = json.loads(f.read())
+def main():
+  for url in SOURCES:
+    file_type = url.split(".")[-1]
+    audio_segment = AudioSegment.from_file(BytesIO(requests.get(url).content), format=file_type)
+    source = get_source(url, file_type=file_type)
+    transcript = asyncio.run(transcribe(source))
+    print(f"Finding keywords: '{KEYWORDS}'")
+    # TODO stem/lemmatize for not exact matches, "lemur" vs "lemurs"
+    paragraphs = transcript["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"]
+    for p in paragraphs:
+      sentences = [s for s in p["sentences"]]
+      for s in sentences:
+        text = s["text"]
+        if any([keyword.lower() in text.lower() for keyword in KEYWORDS]):
+          print(f"---> {text}")
+          start_ms = s["start"] * 1000
+          end_ms = s["end"] * 1000
+          print(f"Playing segment from {start_ms} to {end_ms} milliseconds.")
+          play(audio_segment[start_ms:end_ms])
 
-  keyword = "lemurs".lower()
-  # TODO stem/lemmatize for not exact matches, "lemur" vs "lemurs"
-
-  print(f"Finding keyword: '{keyword}'")
-
-  paragraphs = response["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"]
-  for p in paragraphs:
-    sentences = [s for s in p["sentences"]]
-    for s in sentences:
-      text = s["text"]
-      if keyword in text.lower():
-        print(f"---> {text}")
-        start_ms = s["start"] * 1000
-        end_ms = s["end"] * 1000
-        print(f"Playing segment from {start_ms} to {end_ms} milliseconds.")
-        play(audio_segment[start_ms:end_ms])
-
-asyncio.run(main())
+if __name__ == "__main__":
+  main()
