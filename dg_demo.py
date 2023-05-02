@@ -2,6 +2,7 @@ import asyncio
 from io import BytesIO
 import json
 import requests
+import os
 
 from deepgram import Deepgram
 from pydub import AudioSegment
@@ -28,10 +29,13 @@ def get_source(url, file_type):
     }
   return source
 
-async def transcribe(audio):
-  # TODO cache transcript per url to avoid re-transcribing
-  # f = open("zoo_transcript.json")
-  # response = json.loads(f.read())
+async def transcribe(url, audio):
+  file_path = "./transcripts/" + url.split(".")[-2].split("/")[-1] + ".json"
+  if os.path.exists("./transcripts/") and os.path.exists(file_path):
+    f = open(file_path, "r")
+    return json.loads(f.read())
+  elif not os.path.exists("./transcripts/"):
+    os.makedirs("./transcripts/")
   response = await asyncio.create_task(
     deepgram.transcription.prerecorded(
       audio,
@@ -42,6 +46,9 @@ async def transcribe(audio):
       }
     )
   )
+  with open(file_path, "w") as f:
+    f.write(json.dumps(response))
+    print(f"Saved transcription: {file_path}")
   return response
 
 def main():
@@ -49,7 +56,7 @@ def main():
     file_type = url.split(".")[-1]
     audio_segment = AudioSegment.from_file(BytesIO(requests.get(url).content), format=file_type)
     source = get_source(url, file_type=file_type)
-    transcript = asyncio.run(transcribe(source))
+    transcript = asyncio.run(transcribe(url, source))
     print(f"Finding keywords: '{KEYWORDS}'")
     # TODO stem/lemmatize for not exact matches, "lemur" vs "lemurs"
     paragraphs = transcript["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"]
