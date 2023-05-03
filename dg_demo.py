@@ -84,7 +84,10 @@ def main():
   for url in SOURCES:
     print()
     file_type = url.split(".")[-1]
-    audio_segment = AudioSegment.from_file(BytesIO(requests.get(url).content), format=file_type)
+    if url.startswith("http"):
+      audio_segment = AudioSegment.from_file(BytesIO(requests.get(url).content), format=file_type)
+    else:
+      audio_segment = AudioSegment.from_file(url, format=file_type)
     source = get_source(url, file_type=file_type)
     transcript = asyncio.run(transcribe(url, source))
     get_keywords_in_transcript(transcript, audio_segment)
