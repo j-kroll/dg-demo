@@ -1,5 +1,8 @@
 KEYWORDS = [
-    "lemurs",
-    "tiktok",
-    "websites",
+    # "lemurs",
+    # "tiktok",
+    # "websites",
+    # "cheetos",
+    "divina",
+    "aventuras",
 ]
