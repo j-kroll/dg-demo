@@ -1,4 +1,6 @@
 deepgram-sdk
 ffmpeg
+nltk
 pydub
 requests
+simpleaudio

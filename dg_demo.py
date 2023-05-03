@@ -5,6 +5,8 @@ import requests
 import os
 
 from deepgram import Deepgram
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize
 from pydub import AudioSegment
 from pydub.playback import play
 
@@ -47,28 +49,30 @@ async def transcribe(url, audio):
     )
   )
   with open(file_path, "w") as f:
-    f.write(json.dumps(response))
+    f.write(json.dumps(response, indent=4))
     print(f"Saved transcription: {file_path}")
   return response
 
 def main():
+  ps = PorterStemmer()
+  print(f"Finding keywords: {KEYWORDS}")
   for url in SOURCES:
+    print("\n")
     file_type = url.split(".")[-1]
     audio_segment = AudioSegment.from_file(BytesIO(requests.get(url).content), format=file_type)
     source = get_source(url, file_type=file_type)
     transcript = asyncio.run(transcribe(url, source))
-    print(f"Finding keywords: '{KEYWORDS}'")
-    # TODO stem/lemmatize for not exact matches, "lemur" vs "lemurs"
     paragraphs = transcript["results"]["channels"][0]["alternatives"][0]["paragraphs"]["paragraphs"]
     for p in paragraphs:
       sentences = [s for s in p["sentences"]]
       for s in sentences:
         text = s["text"]
-        if any([keyword.lower() in text.lower() for keyword in KEYWORDS]):
+        stemmed_words = [ps.stem(w).lower() for w in word_tokenize(text)]
+        stemmed_keywords = [ps.stem(k.lower()) for k in KEYWORDS]
+        if any([stemmed_kw in stemmed_words for stemmed_kw in stemmed_keywords]):
           print(f"---> {text}")
           start_ms = s["start"] * 1000
           end_ms = s["end"] * 1000
-          print(f"Playing segment from {start_ms} to {end_ms} milliseconds.")
           play(audio_segment[start_ms:end_ms])
 
 if __name__ == "__main__":
