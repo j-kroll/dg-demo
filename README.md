@@ -23,7 +23,7 @@ python3 dg_demo.py
 
 Given the keywords "lemurs", "tiktok", "websites", and the podcasts [Why zoos can't buy or sell animals](https://www.npr.org/2023/04/26/1172161875/zoos-barter-trade-elephants-jellyfish), [The economics of the influencer industry](https://www.npr.org/transcripts/1170524077), [30 years ago, one decision altered the course of our connected world](https://www.npr.org/transcripts/1172276538).
 
-```
+<pre>
 % python3 dg_demo.py
 Finding keywords: ['lemurs', 'tiktok', 'websites']
 
@@ -40,7 +40,7 @@ Finding keywords: ['lemurs', 'tiktok', 'websites']
 ---> On 04/30/1993, something called The World Wide Web launched into the public domain Interacted appetite searching for a <ins>website</ins>, a window to the world that to get online.
 ---> The Worldwide web allowed anyone to build a <ins>website</ins> with pictures, video, and sound.
 ---> The total number of <ins>websites</ins> is doubling every 2 months.
-```
+</pre>
 
 ## Notable extra features
 
