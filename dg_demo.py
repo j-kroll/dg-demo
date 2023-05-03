@@ -82,7 +82,7 @@ def print_sentence(stemmed_words, keyword_matches, text):
 def main():
   print(f"Finding keywords: {KEYWORDS}")
   for url in SOURCES:
-    print("\n")
+    print()
     file_type = url.split(".")[-1]
     audio_segment = AudioSegment.from_file(BytesIO(requests.get(url).content), format=file_type)
     source = get_source(url, file_type=file_type)
