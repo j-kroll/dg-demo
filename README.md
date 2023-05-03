@@ -11,7 +11,7 @@ Search for keywords in a corpus of audio files. Inspect both the text and audio 
 pip3 install -r requirements.txt
 ```
 
-2. Add your API key in `secrets.py`
+2. Add your API key in `key.py`
 
 ## Run the code
 
